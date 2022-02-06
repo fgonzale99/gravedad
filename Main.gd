@@ -15,19 +15,34 @@ func _ready():
 #	pass
 
 
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			var image=get_node("ColorWheel").get_texture().get_data()
+			image.lock()
+			var pickedColor=image.get_pixel(event.position.x,event.position.y)
+			get_node("CanvasLayer/Label").text=pickedColor.to_html(false)
+			get_node("CanvasLayer/Label").set("custom_colors/font_color", pickedColor)
+			image.unlock()
+			
 
+
+
+
+		
 
 func _on_EnemyTimer_timeout():
+	
 		
+	randomize()
+	
+	
 	var Enemy = load ("res://enemigo.tscn")
 	var e = Enemy.instance()
-	#posición vertical aleatoria
-	e.position.y=round((rand_range(30,700)))
-	#posición fuera del cuadro
-	e.position.x=1350
-	
-	#sprite al azar de la lista de arriba
-	e.get_node('Sprite').set_texture(images[round(rand_range(0,2))])
+	e.rotation=rand_range(0,360)
+	e.position.y=rand_range(200,500)
+	e.position.x=1250
+	e.get_node('Sprite').set_texture(preload('res://assets/triangle.png'))
 	add_child(e)
-
+	
 	
