@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
-var SPEED=300
+var h_speed = 200
+var v_speed = 0
+
 export (String, FILE) var file_name = ""
 # Declare member variables here. Examples:
 # var a = 2
@@ -10,6 +12,7 @@ export (String, FILE) var file_name = ""
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var newColor=Color(rand_range(0,1), rand_range(0,1),rand_range(0,1),1)
+	#var newColor=Color(0, 0, 1 ,1)
 	get_node("Sprite").modulate  = newColor
 	
 	
@@ -29,13 +32,12 @@ func _physics_process(delta):
 	
 	var li_c = selectedColor.linear_interpolate(spriteColor, 0.5) # Equivalent to Color(0.5, 0.5, 0.0)	
 	
-	var dd=sqrt(pow(selectedColor[0]-spriteColor[0],2) + pow(selectedColor[1]-spriteColor[1],2) 
-	+ pow(selectedColor[2]-spriteColor[2],2))
-	
-	
-	print(dd)
-	
-	move_and_slide(Vector2(-SPEED,SPEED*(1-dd)*2))
+	var grav = sqrt(pow(selectedColor[0]-spriteColor[0],2) + pow(selectedColor[1]-spriteColor[1],2) + pow(selectedColor[2]-spriteColor[2],2))
+	print(grav)
+	var acc = 2.2
+	v_speed = v_speed + (sqrt(3) * acc/2 - grav * acc)
+
+	move_and_slide(Vector2(-h_speed, v_speed))
 	
 	
 	

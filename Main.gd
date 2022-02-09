@@ -33,22 +33,20 @@ func _input(event):
 			get_node("CanvasLayer/Label").set("custom_colors/font_color", pickedColor)
 			image.unlock()
 			
+			get_node("Graviton").modulate=Color(pickedColor)
 
 
-
-
-		
 
 func _on_EnemyTimer_timeout():
 	
 		
 	randomize()
 	
-	
 	var Enemy = load ("res://enemigo.tscn")
 	var e = Enemy.instance()
-	e.rotation=rand_range(0,360)
-	e.position.y=rand_range(200,500)
+	#e.rotation=rand_range(0,360)
+	#e.position.y=rand_range(200,500)
+	e.position.y= 340
 	e.position.x=1250
 	e.get_node('Sprite').set_texture(preload('res://assets/triangle.png'))
 	add_child(e)
