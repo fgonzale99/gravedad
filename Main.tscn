@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 autostart = true
 
 [node name="ColorWheel" type="Sprite" parent="."]
+position = Vector2( 0, 414 )
 texture = ExtResource( 2 )
 offset = Vector2( 150, 150 )
 
@@ -21,8 +22,7 @@ transform = Transform2D( 1, 0, 0, 1, 500, 300 )
 margin_top = -33.0
 margin_right = 149.0
 margin_bottom = 31.0
-text = "Color
-"
+text = "000000"
 __meta__ = {
 "_edit_use_anchors_": false
 }

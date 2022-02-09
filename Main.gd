@@ -7,7 +7,9 @@ const images = [preload("res://assets/enemies/box 1.png"),
 
 
 func _ready():
-	pass # Replace with function body.
+	OS.set_window_position(
+		OS.get_screen_position(OS.get_current_screen()) + 
+		OS.get_screen_size()*0.5 - OS.get_window_size()*0.5)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +22,13 @@ func _input(event):
 		if event.pressed:
 			var image=get_node("ColorWheel").get_texture().get_data()
 			image.lock()
-			var pickedColor=image.get_pixel(event.position.x,event.position.y)
+			
+			var posicionAbsolutaWheel=get_node("ColorWheel").position
+			print(posicionAbsolutaWheel)
+			
+			
+			var pickedColor=image.get_pixel(event.position.x-posicionAbsolutaWheel.x,
+			event.position.y-posicionAbsolutaWheel.y)
 			get_node("CanvasLayer/Label").text=pickedColor.to_html(false)
 			get_node("CanvasLayer/Label").set("custom_colors/font_color", pickedColor)
 			image.unlock()
