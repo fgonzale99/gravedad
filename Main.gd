@@ -1,10 +1,8 @@
 extends Node2D
 var Enemy = preload ("res://enemigo.tscn")
 
-export (String) var selectedColor = "ffffff"
-
-
-
+#declara señal
+signal seleccionaColor(color)
 
 
 #establece centrado de pantalla
@@ -26,7 +24,7 @@ func color_wheel_selection(coordenadasMouse):
 	return pickedColor
 	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 #func _process(delta):
 #	pass
 
@@ -35,10 +33,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:	
 			var pickedColor=color_wheel_selection(event.position)
-			selectedColor=pickedColor.to_html(false)
-			#get_node("CanvasLayer/Label").text=pickedColor.to_html(false)
-			#get_node("CanvasLayer/Label").set("custom_colors/font_color", pickedColor)
 			get_node("Graviton").modulate=Color(pickedColor)
+			#emite señal con color seleccionado
+			emit_signal("seleccionaColor",pickedColor)
 
 
 
@@ -46,8 +43,6 @@ func spawn_Enemy():
 	randomize()
 	var Enemy = load ("res://enemigo.tscn")
 	var e = Enemy.instance()
-	#e.rotation=rand_range(0,360)
-	#e.position.y=rand_range(200,500)
 	e.position.y= 340
 	e.position.x=1250
 	e.get_node('Sprite').set_texture(preload('res://assets/triangle.png'))
