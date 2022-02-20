@@ -57,3 +57,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 	#destruye objeto cuando sale de la escena
 	queue_free()
 
+
+
+
+
+func _on_Area2D_body_entered(body):
+	print(body.name)
+	pass # Replace with function body.
