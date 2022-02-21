@@ -16,7 +16,6 @@ const figuras=['Triangulo','Cuadrado']
 func _ready():
 	randomize()
 	
-	
 	var escenaPrincipal=get_tree().get_root().find_node("EscenaPrincipal", true, false)
 	#captura señal de escena principal
 	escenaPrincipal.connect("seleccionaColor", self, "_recibeColor")
@@ -43,7 +42,6 @@ func _physics_process(delta):
 	#verifica color actual del nodo	
 	var spriteColor= get_node("Sprite").modulate  
 	
-	
 	var grav = sqrt(pow(selectedColor[0]-spriteColor[0],2) + pow(selectedColor[1]-spriteColor[1],2) + pow(selectedColor[2]-spriteColor[2],2))
 	#print(grav)
 	var acc = 2.2
@@ -51,13 +49,9 @@ func _physics_process(delta):
 	move_and_slide(Vector2(-h_speed, v_speed))
 	
 
-
-
 func _on_VisibilityNotifier2D_screen_exited():
 	#destruye objeto cuando sale de la escena
 	queue_free()
-
-
 
 
 
