@@ -1,5 +1,7 @@
 extends Node2D
 var Enemy = preload ("res://enemigo.tscn")
+var lista_c = []
+
 
 #declara señal
 signal seleccionaColor(color)
@@ -21,6 +23,8 @@ func color_wheel_selection(coordenadasMouse):
 	var pickedColor=image.get_pixel(coordenadasMouse.x-posicionAbsolutaWheel.x,
 	coordenadasMouse.y-posicionAbsolutaWheel.y)
 	image.unlock()	
+	lista_c.append([pickedColor])
+	print(lista_c)
 	return pickedColor
 	
 
